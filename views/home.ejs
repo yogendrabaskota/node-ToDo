@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do list</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <form id="taskForm">
+      <input type="text" id="newTask" placeholder="New Task" required>
+      <button type="submit">Add</button>
+    </form>
+    <ul id="taskList">
+      
+    </ul>
+  </div>
+
+  <script>
+    document.getElementById('taskForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const taskList = document.getElementById('taskList');
+      const newTaskInput = document.getElementById('newTask');
+      const newTaskText = newTaskInput.value.trim();
+
+      if (newTaskText) {
+        const listItem = document.createElement('li');
+        listItem.textContent = newTaskText;
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.classList.add('remove-button');
+        removeButton.addEventListener('click', function() {
+          taskList.removeChild(listItem);
+        });
+
+        listItem.appendChild(removeButton);
+        taskList.appendChild(listItem);
+        newTaskInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
